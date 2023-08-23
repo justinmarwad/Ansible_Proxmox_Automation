@@ -1,0 +1,15 @@
+- name: Restart GlusterFS 
+  hosts: all
+
+  tasks:
+    - name: Step 1 - Restart Gluster Daemon
+      ansible.builtin.systemd:
+        name: glusterd
+        state: restarted
+        daemon_reload: yes
+
+    - name: Step 2 - Verify status
+      shell: gluster peer status
+      register: results
+    
+    - debug: var=results.stdout_lines

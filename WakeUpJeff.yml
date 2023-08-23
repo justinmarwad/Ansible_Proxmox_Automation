@@ -1,0 +1,16 @@
+# Found here: https://acozine.github.io/html/modules/wakeonlan_module.html
+
+- name: Wake Up Hosts
+  hosts: all
+
+  tasks:
+    - name: Send a magic Wake-on-LAN packet  
+        wakeonlan:
+            mac: '00:00:5E:00:53:66'
+            broadcast: 255.255.255.255
+            delegate_to: localhost
+
+    - wakeonlan:
+        mac: 00:00:5E:00:53:66
+        port: 9
+        delegate_to: localhost
